@@ -2,6 +2,8 @@
 
 A multi-agent news, weather, and knowledge assistant built with LangGraph, AWS Bedrock, and the Model Context Protocol (MCP). AgentCore orchestrates specialized agents to collect, verify, and present real-time information through a conversational interface.
 
+![AgentCore demo](demo.gif)
+
 **🔗 Live Demo:**  https://agentcore-udecdnmzvz5crengrsdlpf.streamlit.app/
 
 > ⚠️ **Note:** The MCP tool server runs on Render's free tier, which sleeps after periods of inactivity — your first query may take longer while it wakes up.
