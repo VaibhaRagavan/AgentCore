@@ -23,7 +23,7 @@ async def get_tools():
     mcp_url= os.getenv("MCP_SERVER_URL") or st.secrets.get("MCP_SERVER_URL","http://127.0.0.1:8000/mcp")
     client = MultiServerMCPClient(
         {"server": {
-            "url": "http://127.0.0.1:8000/mcp",
+            "url": mcp_url,
             "transport": "streamable_http"
         }}
     )
