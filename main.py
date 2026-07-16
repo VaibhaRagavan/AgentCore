@@ -143,6 +143,7 @@ async def validate(state: Orchestrator) -> Dict:
             "role": "user",
             "content": [{"text": state["current_task"]}]
         }],
+        max_tokens=2500,
         tools=tools,
         langchain_tools=langchain_tool,
     )
