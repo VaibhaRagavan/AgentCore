@@ -1,6 +1,18 @@
 import streamlit as st
 from main import main
 import asyncio
+import requests
+import threading
+
+def wake_server():
+    try:
+        requests.get("https://agentcore-t1gr.onrender.com/mcp", timeout=5)
+    except Exception:
+        pass  # ignore errors — this is just a wake-up ping, not a real call
+
+if "server_pinged" not in st.session_state:
+    threading.Thread(target=wake_server, daemon=True).start()
+    st.session_state["server_pinged"] = True
 st.set_page_config(page_title="AgentCore", page_icon="🤖",layout="wide")
 
 WELCOME="Hello 👋 I can help you with Weather, Wikipedia, and News.\n\n💡 For weather, include the country for accuracy e.g. *Dublin, Ireland* or *Mumbai, India*"
