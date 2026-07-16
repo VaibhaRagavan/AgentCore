@@ -110,12 +110,19 @@ streamlit run stream_app.py
 ```
 ---
 
-## Roadmap
+## Known Limitations & Roadmap
 
-- [ ] Cognito authentication
-- [ ] DynamoDB session persistence
-- [ ] Parallelize agent calls to reduce latency
-- [ ] Containrised approach to avoid wakingup the server
+- **No persistent session memory** — conversation state resets on app restart, since sessions aren't saved to a database yet.
+  → **Fix: DynamoDB session persistence** 
+
+- **No authentication layer** — the app is open access with no user login or request throttling.
+  → **Fix: Cognito authentication** 
+
+- **Sequential agent execution** — orchestrator, collector, verifier, and narrator run one after another rather than in parallel, which is the main driver of the 15–35s response time.
+  → **Fix: Parallelize agent calls to reduce latency** 
+
+- **MCP server cold starts** — hosted on Render's free tier, so the tool server sleeps after inactivity and needs to wake up on first query.
+  → **Fix: Containerised approach to avoid waking up the server** 
 
 ---
 
