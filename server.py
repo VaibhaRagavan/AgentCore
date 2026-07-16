@@ -22,7 +22,9 @@ General_queries={
     "latest business", "financial news", "economy update", "markets today",
     "business news", "latest market", "any business news",
     }
-server=FastMCP("server",stateless_http=True)
+server=FastMCP("server",stateless_http=True,host="0.0.0.0",
+    port=int(os.environ.get("PORT", 8000))
+)
 
 ##SearchTool 
 @server.tool()
