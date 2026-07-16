@@ -41,6 +41,7 @@ flowchart TD
     B --> E[Narrator]
     C --> B
     D --> B
+    B --> F
     E --> F[Final Response]
 ```
 ---
