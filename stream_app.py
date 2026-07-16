@@ -14,10 +14,7 @@ if "server_pinged" not in st.session_state:
     threading.Thread(target=wake_server, daemon=True).start()
     st.session_state["server_pinged"] = True
 st.set_page_config(page_title="AgentCore", page_icon="🤖",layout="wide")
-#––––waking up the mcp server–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-with st.spinner("Waking up the assistant... first request may take up to a minute"):
-    result = asyncio.run(main(query,history))
-    st.markdown(result)
+
 WELCOME="Hello 👋 I can help you with Weather, Wikipedia, and News.\n\n💡 For weather, include the country for accuracy e.g. *Dublin, Ireland* or *Mumbai, India*"
 
 #––––session state–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -54,7 +51,8 @@ if query:
     with st.chat_message("user"):
         st.markdown(query)
     with st.chat_message("assistant"):
-        with st.spinner("Processing your query..."):
-            result = asyncio.run(main(query,history))
-            st.markdown(result)
+        #––––waking up the mcp server–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+        with st.spinner("Waking up the assistant... first request may take up to a minute"):
+        result = asyncio.run(main(query,history))
+        st.markdown(result)
     message.append({"role": "assistant", "content": result})
