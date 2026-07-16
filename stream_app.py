@@ -52,7 +52,7 @@ if query:
         st.markdown(query)
     with st.chat_message("assistant"):
         #––––waking up the mcp server–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-        with st.spinner("Waking up the assistant... first request may take up to a minute"):
+        with st.spinner("Waking up the assistant and processing your query... request may take up to a minute""):
             result = asyncio.run(main(query,history))
             st.markdown(result)
     message.append({"role": "assistant", "content": result})
