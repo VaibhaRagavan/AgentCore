@@ -1,0 +1,15 @@
+langgraph-cli[inmem]
+langchain
+langchain-community
+langchain-mcp-adapters
+langchain-core
+langchain-aws
+langchain-openai
+langchain-tavily
+mcp
+feedparser
+python-dotenv
+requests
+streamlit
+boto3
+wikipedia

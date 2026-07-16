@@ -1,0 +1,11 @@
+.env
+.env.local
+*.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.langgraph_api/
+.ipynb_checkpoints/
+node_modules/
+.DS_Store

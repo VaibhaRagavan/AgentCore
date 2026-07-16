@@ -1,0 +1,7 @@
+{
+    "dependencies":["."],
+    "graphs":{
+        "tool":"./main.py:graph"
+    },
+    "env":"/Users/vaibha/Documents/AgentCore/.env"
+}

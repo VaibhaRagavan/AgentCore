@@ -1,0 +1,45 @@
+import streamlit as st
+from main import main
+import asyncio
+st.set_page_config(page_title="AgentCore", page_icon="🤖",layout="wide")
+
+WELCOME="Hello 👋 I can help you with Weather, Wikipedia, and News.\n\n💡 For weather, include the country for accuracy e.g. *Dublin, Ireland* or *Mumbai, India*"
+
+#––––session state–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+if "session_id" not in st.session_state:
+    st.session_state.session_id = "chat_1"
+if "all_sessions" not in st.session_state:
+    st.session_state.all_sessions = {"chat_1": [
+        {"role": "assistant", "content": WELCOME}
+    ]}
+#–––––––sidebar–––––––––––––––––––––––––
+with st.sidebar:
+    st.header("Chats")
+    for s_id in st.session_state.all_sessions:
+        if st.button(s_id):
+            st.session_state.session_id = s_id
+            st.rerun()
+    if st.button("+ New Chat"):
+        new_session_id =f"chat_{len(st.session_state.all_sessions)+1}"
+        st.session_state.all_sessions[new_session_id] = [
+            {"role": "assistant", "content": WELCOME}
+        ]
+        st.session_state.session_id = new_session_id
+        st.rerun()
+
+message=st.session_state.all_sessions[st.session_state.session_id]
+#–––Chat–––––––––––––––––––––––––––––––––––––––––
+for msg in message:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
+query=st.chat_input("Write a message...")
+history=message[-5:]
+if query:
+    message.append({"role": "user", "content": query})
+    with st.chat_message("user"):
+        st.markdown(query)
+    with st.chat_message("assistant"):
+        with st.spinner("Processing your query..."):
+            result = asyncio.run(main(query,history))
+            st.markdown(result)
+    message.append({"role": "assistant", "content": result})
