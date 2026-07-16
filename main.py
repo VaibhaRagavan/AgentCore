@@ -27,7 +27,15 @@ async def get_tools():
             "transport": "streamable_http"
         }}
     )
-    return await client.get_tools()
+    max_retries = 6
+    delay = 8
+    for attempt in range(1, max_retries+1):
+        try:
+            return await client.get_tools()
+        except Exception as e:
+            if attempt == max_retries:
+                raise
+            await asyncio.sleep(delay)
 
 def bedrock_tools(tools):
     return bd.convert_to_bedrock_tools(tools)
